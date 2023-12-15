@@ -6,6 +6,7 @@ let newGameBtn=document.querySelector(".newGame");
 let turn=document.querySelector(".turn");
 let turnO=true;
 let count=0;
+let iswinner=false;
 
 const winPatterns=[
     [0,1,2],
@@ -41,6 +42,7 @@ boxes.forEach((box)=>{
 const reload=()=>{
     turnO=true;
     count=0;
+    iswinner=false;
     turn.innerText="Player 'O' Turn";
     winBox.classList.add("winBox");
     boxEnable();
@@ -77,8 +79,9 @@ const checkWinner=()=>{
 
         if(pos1!=="" && pos2!=="" && pos3!==""){
             if(pos1===pos2 && pos2===pos3){
+                iswinner=true;
                 showWinner(pos1);
-            }else if(count===9){
+            }else if(count===9 && !iswinner){
                 turn.innerText="";
                 winMsg.innerText=`It's a DRAW`;
                 winBox.classList.remove("winBox");
